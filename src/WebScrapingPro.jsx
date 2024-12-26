@@ -1,5 +1,17 @@
+import React, { useRef } from 'react';
 
 const WebScrapingPro = () => {
+  // Create refs for each section
+  const servicesRef = useRef(null);
+  const portfolioRef = useRef(null);
+  const testimonialsRef = useRef(null);
+  const contactRef = useRef(null);
+
+  // Scroll handler function
+  const scrollToSection = (elementRef) => {
+    elementRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const services = [
     {
       title: "Price Monitoring",
@@ -33,15 +45,15 @@ const WebScrapingPro = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="bg-gray-900 text-gray-300 p-4">
+      <nav className="bg-gray-900 text-gray-300 p-4 sticky top-0 z-50">
         <div className="container mx-auto flex justify-between items-center">
           <div className="text-xl font-semibold text-white">Web Scraping Pro</div>
           <div className="space-x-6">
-            <a href="#" className="hover:text-white">Home</a>
-            <a href="#" className="hover:text-white">Services</a>
-            <a href="#" className="hover:text-white">Portfolio</a>
-            <a href="#" className="hover:text-white">Testimonials</a>
-            <a href="#" className="hover:text-white">Contact</a>
+            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-white">Home</button>
+            <button onClick={() => scrollToSection(servicesRef)} className="hover:text-white">Services</button>
+            <button onClick={() => scrollToSection(portfolioRef)} className="hover:text-white">Portfolio</button>
+            <button onClick={() => scrollToSection(testimonialsRef)} className="hover:text-white">Testimonials</button>
+            <button onClick={() => scrollToSection(contactRef)} className="hover:text-white">Contact</button>
           </div>
         </div>
       </nav>
@@ -56,7 +68,7 @@ const WebScrapingPro = () => {
       </div>
 
       {/* Services Section */}
-      <div className="bg-gray-50 py-16">
+      <div ref={servicesRef} className="bg-gray-50 py-16 scroll-mt-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -71,7 +83,7 @@ const WebScrapingPro = () => {
       </div>
 
       {/* Portfolio Section */}
-      <div className="py-16">
+      <div ref={portfolioRef} className="py-16 scroll-mt-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-2">Portfolio</h2>
           <p className="text-center text-gray-600 mb-12">Check out some of our past work.</p>
@@ -88,7 +100,7 @@ const WebScrapingPro = () => {
       </div>
 
       {/* Testimonials Section */}
-      <div className="bg-gray-50 py-16">
+      <div ref={testimonialsRef} className="bg-gray-50 py-16 scroll-mt-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-2">Testimonials</h2>
           <p className="text-center text-gray-600 mb-12">What our clients say</p>
@@ -102,7 +114,7 @@ const WebScrapingPro = () => {
       </div>
 
       {/* Contact Form */}
-      <div className="py-16">
+      <div ref={contactRef} className="py-16 scroll-mt-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-2">Contact Us</h2>
           <p className="text-center text-gray-600 mb-8">Get in touch to discuss your web scraping needs.</p>
